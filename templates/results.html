@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Prediction Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 1%;
+            padding: 1%;
+            background-color: #d2d2d2;
+        }
+
+        .a {
+            display: flex;
+            justify-content: center;
+            font-size: 40px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header styles */
+        h2 {
+            color: #333;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        /* Image styles */
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        /* Prediction results section styles */
+        .prediction-results {
+            margin-bottom: 40px;
+        }
+
+        /* Plots section styles */
+        .plots {
+            margin-bottom: 40px;
+        }
+
+        /* Monte Carlo Simulation results styles */
+        .monte-carlo {
+            margin-bottom: 40px;
+        }
+
+        /* Footer styles */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 40px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .box {
+            display: inline-block;
+            /* Make the box inline-block to resize based on content */
+            background-color: #f0f0f0;
+            border: 2px solid #333;
+            padding: 40px;
+            margin: 20px;
+            width: 90%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1 class="a">Predicted Results</h1>
+    <div class="box">
+        <h1>Using Linear regression -</h1>
+        <h2>Accuracy Metrices:</h2>
+        <h3>Open Price:</h3>
+        <div>
+            {{ table3|safe }}
+        </div>
+        <h3>Close Price:</h3>
+        <div>
+            {{ table4|safe }}
+        </div>
+
+        <h2>Next Day Prediction</h2>
+        <p>Date of next day: {{ next_day_date }}</p>
+        <p>Next Day Predicted Open Price: {{ next_day_prediction[0][0] }}</p>
+        <p>Next Day Predicted Close Price: {{ next_day_prediction[0][1] }}</p>
+
+        <h2>Plots</h2>
+
+        <h3>Actual vs Predicted Prices with Dates</h3>
+        <img src="{{ url_for('static', filename=plot) }}" alt="predicted price">
+        <h3>Difference between Opens</h3>
+        <img src="{{ url_for('static', filename=plot_diff_open) }}" alt="Difference Open">
+        <h3>Difference between Closes</h3>
+        <img src="{{ url_for('static', filename=plot_diff_close) }}" alt="Difference Close">
+    </div>
+
+    <div class="box">
+        <h1>Using Monte Carlo Simulation Results -</h1>
+        <p>Date of next day: {{ next_day_date }}</p>
+        <p>Mean Predicted Open Price for the Next Day: {{ mean_open_price }}</p>
+        <p>Standard Deviation of Predicted Open Price for the Next Day: {{ std_open_price }}</p>
+        <p>Mean Predicted Close Price for the Next Day: {{ mean_close_price }}</p>
+        <p>Standard Deviation of Predicted Close Price for the Next Day: {{ std_close_price }}</p>
+    </div>
+</body>
+
+</html>
